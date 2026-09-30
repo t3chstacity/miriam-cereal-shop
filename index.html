@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miriam's Cereal Shop - Fresh Grains & Cereals Delivered</title>
+    <link rel="icon" type="image/x-icon" href="logo_png.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#083818',
+                            green: '#0f4c28',
+                            lightgreen: '#1a6b3b',
+                            accent: '#e6a100',
+                            gold: '#f3b210',
+                            cream: '#fdfbf7',
+                            softgray: '#f4f6f4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+        }
+        .hero-pattern {
+            background-color: #0f4c28;
+            background-image: radial-gradient(#1a6b3b 1.5px, transparent 1.5px), radial-gradient(#1a6b3b 1.5px, #0f4c28 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0f4c28;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-brand-cream text-gray-800 antialiased leading-relaxed">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-header border-b border-emerald-900/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 bg-brand-green rounded-full flex items-center justify-center text-brand-gold text-2xl shadow-md border-brand-accent group-hover:scale-105 transition-transform">
+                        <img src="logo_png.png" alt="Miriam's Cereal Shop Logo" class="w-12 h-12 object-contain">
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-black tracking-tight text-brand-green font-serif leading-none">Miriam's</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">Cereal Shop</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+                    <a href="#home" class="hover:text-brand-green transition-colors">Home</a>
+                    <a href="#store" class="hover:text-brand-green transition-colors">Our Cereals</a>
+                    <a href="#calculator" class="hover:text-brand-green transition-colors">Quick Order Calculator</a>
+                    <a href="#about" class="hover:text-brand-green transition-colors">About Us</a>
+                    <a href="#contact" class="hover:text-brand-green transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4">
+                    <!-- Quick Contact / Order -->
+                    <a href="https://wa.me/254703924543" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-100 text-brand-green hover:bg-emerald-200 px-4 py-2 rounded-full text-xs font-bold transition-all">
+                        <i class="fa-brands fa-whatsapp text-base text-emerald-600"></i>
+                        <span>0703 924 543</span>
+                    </a>
+
+                    <!-- Cart Trigger -->
+                    <button onclick="toggleCartDrawer()" class="relative bg-brand-green hover:bg-brand-dark text-white p-3 rounded-full shadow-md transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-brand-accent text-brand-dark text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white scale-0 transition-transform">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 hover:text-brand-green focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-gray-800 hover:text-brand-green">Home</a>
+            <a href="#store" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-gray-800 hover:text-brand-green">Our Cereals</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-gray-800 hover:text-brand-green">Order Calculator</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-gray-800 hover:text-brand-green">About Us</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-base font-semibold text-gray-800 hover:text-brand-green">Contact</a>
+            <a href="https://wa.me/254703924543" target="_blank" class="flex items-center justify-center gap-2 bg-brand-green text-white py-3 rounded-xl font-bold w-full text-center">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Order via WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative hero-pattern text-white overflow-hidden py-16 lg:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-brand-gold px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase">
+                        <i></i> Express Doorstep Delivery Across Town
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif leading-tight">
+                        Fresh, Nutritious <br class="hidden sm:inline"><span class="text-brand-gold">Cereals & Grains</span> Delivered To Your Doorstep
+                    </h1>
+                    <p class="text-emerald-100 text-lg max-w-2xl mx-auto lg:mx-0 font-normal">
+                        Experience pure quality and ultimate convenience. From organic pulses and premium Ndengu to customized honey granola and porridge mixes — we measure, pack, and deliver right to your home!
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <a href="#store" class="bg-brand-gold hover:bg-yellow-500 text-brand-dark font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i></i> Browse & Order Cereals
+                        </a>
+                        <a href="https://wa.me/254703924543?text=Hi%20Miriam's%20Cereal%20Shop,%20I'd%20like%20to%20place%20an%20order." target="_blank" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-8 py-4 rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i> Quick WhatsApp Order
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-emerald-800/60 max-w-lg mx-auto lg:mx-0 text-left">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-gold text-xl"></i>
+                            <span class="text-xs text-emerald-100 font-medium">100% Cleaned & Sorted</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-weight-scale text-brand-gold text-xl"></i>
+                            <span class="text-xs text-emerald-100 font-medium">Custom KG Quantities</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock-rotate-left text-brand-gold text-xl"></i>
+                            <span class="text-xs text-emerald-100 font-medium">Same-Day Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Graphic -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md bg-white p-6 rounded-3xl shadow-2xl border-4 border-brand-accent/30 text-gray-800">
+                        <div class="absolute -top-4 -right-4 bg-brand-accent text-brand-dark font-extrabold px-4 py-2 rounded-full text-xs shadow-md uppercase">
+                            Popular Choice
+                        </div>
+                        <div class="aspect-video bg-emerald-50 rounded-2xl mb-4 overflow-hidden relative flex items-center justify-center">
+                           <img src="cereals.jpg" alt="Custom Healthy Mixes" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent flex items-end p-4">
+                                <span class="text-white font-bold text-sm">Farm Fresh Quality Guaranteed</span>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-xl text-brand-green font-serif mb-1">Custom Healthy Mixes</h3>
+                        <p class="text-xs text-gray-600 mb-4">Choose your custom kilogram amounts for any pulse, grain, or cereal blend.</p>
+                        
+                        <div class="bg-gray-50 p-3 rounded-xl flex items-center justify-between text-xs font-semibold mb-4 border border-gray-200">
+                            <span>Primary Contact:</span>
+                            <span class="text-brand-green font-bold">0703 924 543</span>
+                        </div>
+
+                        <a href="#calculator" class="block w-full text-center bg-brand-green hover:bg-brand-dark text-white font-bold py-3 rounded-xl transition-all shadow">
+                            Try Quick KG Calculator
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 rounded-2xl bg-brand-cream/60 border border-amber-900/5 hover:shadow-md transition-all">
+                    <div class="w-14 h-14 bg-emerald-100 text-brand-green rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-brand-green mb-2">Hygienic & Pre-Sorted</h3>
+                    <p class="text-sm text-gray-600">All our grains, beans, and cereals undergo thorough stone-cleaning and hygienic packing.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-cream/60 border border-amber-900/5 hover:shadow-md transition-all">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-boxes-packing"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-brand-green mb-2">Buy Any Quantity</h3>
+                    <p class="text-sm text-gray-600">Whether you need 1kg for weekly meals or 50kg bulk supply for your restaurant, we've got you covered.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-cream/60 border border-amber-900/5 hover:shadow-md transition-all">
+                    <div class="w-14 h-14 bg-emerald-100 text-brand-green rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-brand-green mb-2">Convenient Doorstep Delivery</h3>
+                    <p class="text-sm text-gray-600">Order online or via WhatsApp and receive prompt doorstep delivery straight to your location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cereal Catalog Section -->
+    <section id="store" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-brand-accent font-extrabold uppercase text-xs tracking-wider">Premium Selection</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-green font-serif mt-1">Explore Our Fresh Cereals & Grains</h2>
+            <p class="text-gray-600 text-sm sm:text-base mt-2">Select your desired quantity in Kilograms (KG) for instant price calculation and add directly to your order.</p>
+
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="category-filters">
+                <button onclick="filterCategory('all')" class="cat-btn active bg-brand-green text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-sm">All Items</button>
+                <button onclick="filterCategory('pulses')" class="cat-btn bg-white text-gray-700 hover:bg-gray-100 px-5 py-2 rounded-full text-xs font-bold border border-gray-200 transition-all">Legumes & Pulses</button>
+                <button onclick="filterCategory('grains')" class="cat-btn bg-white text-gray-700 hover:bg-gray-100 px-5 py-2 rounded-full text-xs font-bold border border-gray-200 transition-all">Whole Grains</button>
+                <button onclick="filterCategory('breakfast')" class="cat-btn bg-white text-gray-700 hover:bg-gray-100 px-5 py-2 rounded-full text-xs font-bold border border-gray-200 transition-all">Granola & Breakfast</button>
+                <button onclick="filterCategory('flour')" class="cat-btn bg-white text-gray-700 hover:bg-gray-100 px-5 py-2 rounded-full text-xs font-bold border border-gray-200 transition-all">Specialty Flours</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+            <!-- Product Cards injected via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Quick KG Calculator & Direct Order Builder -->
+    <section id="calculator" class="py-16 bg-brand-green text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-brand-gold font-bold text-xs uppercase tracking-widest">Custom Order Calculator</span>
+                    <h2 class="text-3xl sm:text-4xl font-black font-serif">Calculate & Order Custom Weights Fast</h2>
+                    <p class="text-emerald-100 text-sm">
+                        Need exact amounts for household meal prep or commercial supply? Choose your grain type and specify custom weight in kilograms for an immediate total quote.
+                    </p>
+                    
+                    <div class="bg-white/10 border border-white/20 p-5 rounded-2xl backdrop-blur-md space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-extrabold flex items-center justify-center text-xs">1</div>
+                            <span class="text-xs font-semibold">Select your item & desired Weight in KG</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-extrabold flex items-center justify-center text-xs">2</div>
+                            <span class="text-xs font-semibold">Review real-time total price calculation</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-extrabold flex items-center justify-center text-xs">3</div>
+                            <span class="text-xs font-semibold">Dispatch instantly to Miriam's via WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-white text-gray-800 p-6 sm:p-8 rounded-3xl shadow-2xl">
+                    <h3 class="text-xl font-bold text-brand-green font-serif mb-6 flex items-center gap-2">
+                        <i></i> Quick Custom Weight Estimator
+                    </h3>
+
+                    <div class="space-y-5">
+                        <!-- Select Product -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-600 mb-2">Select Cereal or Grain</label>
+                            <select id="calc-product" onchange="updateCalcEstimate()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-green focus:outline-none font-medium">
+                                <!-- Options dynamically rendered -->
+                            </select>
+                        </div>
+
+                        <!-- Weight Input -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-bold uppercase text-gray-600">Quantity (Kilograms)</label>
+                                <span class="text-xs text-brand-green font-extrabold" id="calc-unit-price">KSh 0 / kg</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <input type="number" id="calc-kg" value="5" min="0.5" step="0.5" oninput="updateCalcEstimate()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-lg font-extrabold text-brand-green focus:ring-2 focus:ring-brand-green focus:outline-none">
+                                <div class="flex gap-1">
+                                    <button onclick="setCalcKg(1)" class="px-3 py-2 bg-gray-100 hover:bg-emerald-100 text-gray-700 font-bold text-xs rounded-lg transition-colors">1kg</button>
+                                    <button onclick="setCalcKg(5)" class="px-3 py-2 bg-gray-100 hover:bg-emerald-100 text-gray-700 font-bold text-xs rounded-lg transition-colors">5kg</button>
+                                    <button onclick="setCalcKg(10)" class="px-3 py-2 bg-gray-100 hover:bg-emerald-100 text-gray-700 font-bold text-xs rounded-lg transition-colors">10kg</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 font-medium block">Estimated Subtotal</span>
+                                <span class="text-xs text-brand-green font-semibold" id="calc-breakdown">5 kg x KSh 180</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-black text-brand-green" id="calc-total">KSh 900</span>
+                            </div>
+                        </div>
+
+                        <!-- Add to Cart or Instant WhatsApp -->
+                        <div class="grid sm:grid-cols-2 gap-3 pt-2">
+                            <button onclick="addCalcToCart()" class="bg-brand-green hover:bg-brand-dark text-white font-bold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Order List
+                            </button>
+                            <button onclick="orderCalcDirectWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Direct Order via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Miriam's Cereal Shop -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-brand-accent font-extrabold uppercase text-xs tracking-wider">Our Brand Story</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-green font-serif">Bringing Quality & Convenience To Your Kitchen</h2>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Founded with a mission to eliminate the hassle of traditional cereal buying, <strong class="text-brand-green">Miriam's Cereal Shop</strong> brings clean, wholesome, and carefully selected grains directly to your home.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        We source directly from trusted farmers, ensuring our legumes, pulses, and grain mixes are thoroughly sorted, free from stones, and packaged in food-grade, hygienic materials. Whether you are prepping household meals or stocking up, we guarantee speed, quality, and exceptional service every time.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="border-l-4 border-brand-green pl-4">
+                            <span class="block text-2xl font-black text-brand-green">100%</span>
+                            <span class="text-xs text-gray-500 font-semibold uppercase">Stone-Free Guarantee</span>
+                        </div>
+                        <div class="border-l-4 border-brand-accent pl-4">
+                            <span class="block text-2xl font-black text-brand-green">Same-Day</span>
+                            <span class="text-xs text-gray-500 font-semibold uppercase">Doorstep Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-cream border border-emerald-900/10 p-8 rounded-3xl relative">
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-brand-green flex items-center justify-center shrink-0 font-bold">
+                                <i class="fa-solid fa-wheat-awn"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-green">Direct Sourcing</h4>
+                                <p class="text-xs text-gray-600 mt-1">Grains harvested from premium farms with maximum nutritional retention.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-bold">
+                                <i class="fa-solid fa-mortar-pestle"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-green">Custom Porridge & Granola Blends</h4>
+                                <p class="text-xs text-gray-600 mt-1">Formulated mixes with sorghum, millet, seeds, and natural honey sweeteners.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-brand-green flex items-center justify-center shrink-0 font-bold">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-green">Dedicated Customer Service</h4>
+                                <p class="text-xs text-gray-600 mt-1">Friendly order assistance via call or WhatsApp at <span class="font-bold text-brand-green">0703 924 543</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-brand-softgray border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-accent font-extrabold uppercase text-xs tracking-wider">Get In Touch</span>
+                <h2 class="text-3xl font-extrabold text-brand-green font-serif mt-1">We'd Love To Hear From You</h2>
+                <p class="text-gray-600 text-sm mt-2">Have a question or custom bulk inquiry? Reach out directly using our contacts below.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Phone & WhatsApp Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:border-brand-green transition-colors">
+                    <div class="w-12 h-12 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800">Call / WhatsApp</h3>
+                    <p class="text-sm text-gray-600 mt-1">Direct Orders & Support</p>
+                    <a href="https://wa.me/254703924543" target="_blank" class="inline-block mt-3 font-extrabold text-brand-green text-lg hover:underline">
+                        0703 924 543
+                    </a>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:border-brand-green transition-colors">
+                    <div class="w-12 h-12 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800">Email Address</h3>
+                    <p class="text-sm text-gray-600 mt-1">Official Inquiries & Feedback</p>
+                    <a href="mailto:miriam.cereals@gmail.com" class="inline-block mt-3 font-extrabold text-brand-green text-sm sm:text-base hover:underline">
+                        miriam.cereals@gmail.com
+                    </a>
+                </div>
+
+                <!-- Operating Hours Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:border-brand-green transition-colors">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800">Opening Hours</h3>
+                    <p class="text-sm text-gray-600 mt-1">Monday - Saturday</p>
+                    <span class="inline-block mt-3 font-extrabold text-brand-green text-sm">
+                        7:00 AM - 7:00 PM
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-12 border-t border-emerald-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-emerald-800/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-green rounded-full flex items-center justify-center text-brand-gold text-xl border border-brand-accent">
+                        <img src="logo_png.png" alt="" srcset="">
+                    </div>
+                    <div>
+                        <span class="block text-xl font-bold font-serif leading-none">Miriam's Cereal Shop</span>
+                        <span class="text-xs text-emerald-300">Freshness & Delivery You Can Count On</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 text-sm text-emerald-200">
+                    <a href="#home" class="hover:text-white transition-colors">Home</a>
+                    <a href="#store" class="hover:text-white transition-colors">Store</a>
+                    <a href="#calculator" class="hover:text-white transition-colors">Calculator</a>
+                    <a href="#about" class="hover:text-white transition-colors">About</a>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-emerald-400 gap-4">
+                <p>&copy; <span id="year">2026</span> Miriam's Cereal Shop. All Rights Reserved.</p>
+                <p class="flex items-center gap-2">
+                    <span>Contact: 0703 924 543</span> | <span>miriam.cereals@gmail.com</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Cart Header -->
+        <div class="p-5 bg-brand-green text-white flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-basket-shopping text-brand-gold text-lg"></i>
+                <h3 class="font-bold font-serif text-lg">Your Cereal Order List</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="text-emerald-200 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
+            <!-- Items rendered via JS -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
+            <div class="space-y-1 text-sm">
+                <div class="flex justify-between text-gray-600">
+                    <span>Total Weight:</span>
+                    <span id="cart-total-weight" class="font-bold text-gray-800">0 kg</span>
+                </div>
+                <div class="flex justify-between text-lg font-black text-brand-green pt-2 border-t border-gray-200">
+                    <span>Subtotal:</span>
+                    <span id="cart-total-price">KSh 0</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full bg-brand-green hover:bg-brand-dark disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl transition-all shadow text-sm flex items-center justify-center gap-2">
+                <span>Proceed to Order</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl custom-scrollbar">
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-green font-serif">Complete Your Order</h3>
+                <p class="text-xs text-gray-500 mt-1">Provide delivery details to dispatch your order directly to WhatsApp or Email.</p>
+            </div>
+
+            <!-- Order Summary Quick Box -->
+            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 mb-6 text-xs space-y-2">
+                <div class="flex justify-between font-bold text-brand-green border-b border-emerald-200 pb-2">
+                    <span>Order Summary</span>
+                    <span id="modal-item-count">0 items</span>
+                </div>
+                <div id="modal-items-summary" class="max-h-32 overflow-y-auto text-gray-600 space-y-1">
+                    <!-- List summary JS -->
+                </div>
+                <div class="flex justify-between font-black text-sm text-brand-green pt-2 border-t border-emerald-200">
+                    <span>Total Payable:</span>
+                    <span id="modal-total-price">KSh 0</span>
+                </div>
+            </div>
+
+            <!-- Customer Details Form -->
+            <form id="order-form" onsubmit="handleFinalSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Full Name *</label>
+                    <input type="text" id="customer-name" required placeholder="e.g. Jane Doe" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-green focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Delivery Address / Location *</label>
+                    <input type="text" id="customer-address" required placeholder="e.g. Westlands, Estate / Apartment Block" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-green focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Additional Delivery Notes (Optional)</label>
+                    <textarea id="customer-notes" rows="2" placeholder="e.g. Preferred delivery time or specific instructions..." class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-green focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-2 space-y-3">
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl transition-all shadow text-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Dispatch Order via WhatsApp
+                    </button>
+                    
+                    <button type="button" onclick="sendViaEmail()" class="w-full bg-brand-green hover:bg-brand-dark text-white font-bold py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> Send via Email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Cereal Product Database
+        const products = [
+            {
+                id: 'ndengu',
+                name: 'Cleaned Green Grams (Ndengu)',
+                category: 'pulses',
+                pricePerKg: 180,
+                unit: 'kg',
+                icon: 'fa-seedling',
+                badge: 'Best Seller',
+                description: 'Pre-sorted, stone-free polished green grams. Rich in protein and easy to cook.'
+            },
+            {
+                id: 'yellow-maize',
+                name: 'Premium Yellow Maize / Grain',
+                category: 'grains',
+                pricePerKg: 120,
+                unit: 'kg',
+                icon: 'fa-wheat-awn',
+                badge: 'Fresh Crop',
+                description: 'Cleaned whole yellow maize grains ideal for boiling, mixing, or milling.'
+            },
+            {
+                id: 'oats-muesli',
+                name: 'Organic Whole Oats & Muesli Mix',
+                category: 'breakfast',
+                pricePerKg: 350,
+                unit: 'kg',
+                icon: 'fa-bowl-rice',
+                badge: 'Healthy Breakfast',
+                description: 'Rolled oats infused with raisins, dried fruit, and natural seeds for energy.'
+            },
+            {
+                id: 'brown-grams',
+                name: 'Brown Grams / Whole Lentils',
+                category: 'pulses',
+                pricePerKg: 200,
+                unit: 'kg',
+                icon: 'fa-disease',
+                badge: 'Nutritious',
+                description: 'High-protein organic whole brown lentils carefully cleaned for wholesome stewing.'
+            },
+            {
+                id: 'kidney-beans',
+                name: 'Red & White Kidney Beans',
+                category: 'pulses',
+                pricePerKg: 160,
+                unit: 'kg',
+                icon: 'fa-capsules',
+                badge: 'Pantry Essential',
+                description: 'Carefully hand-picked kidney beans that cook tender with rich flavor.'
+            },
+            {
+                id: 'granola-honey',
+                name: 'Crunchy Honey & Nut Granola',
+                category: 'breakfast',
+                pricePerKg: 480,
+                unit: 'kg',
+                icon: 'fa-stroopwafel',
+                badge: 'Artisan Crafted',
+                description: 'Oat clusters baked in pure natural honey, almonds, cashews, and pumpkin seeds.'
+            },
+            {
+                id: 'sorghum-millet',
+                name: 'Sorghum & Finger Millet Blend',
+                category: 'grains',
+                pricePerKg: 150,
+                unit: 'kg',
+                icon: 'fa-cubes-stacked',
+                badge: 'Traditional Grain',
+                description: 'Whole sorghum and brown finger millet for energetic traditional dishes.'
+            },
+            {
+                id: 'composite-flour',
+                name: 'Nutritious Porridge Composite Flour',
+                category: 'flour',
+                pricePerKg: 220,
+                unit: 'kg',
+                icon: 'fa-jar',
+                badge: 'Family Favorite',
+                description: 'Specialty milled blend of millet, sorghum, amaranth, and groundnuts.'
+            }
+        ];
+
+        // Global Cart State
+        let cart = [];
+        let activeCategory = 'all';
+
+        // Initializer on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCatalog();
+            populateCalcSelect();
+            updateCalcEstimate();
+            
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Catalog Grid
+        function renderCatalog() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filteredProducts = activeCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category === activeCategory);
+
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group";
+                
+                card.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 bg-emerald-50 text-brand-green rounded-2xl flex items-center justify-center text-2xl group-hover:bg-brand-green group-hover:text-brand-gold transition-colors">
+                                <i class="fa-solid ${product.icon}"></i>
+                            </div>
+                            <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full">
+                                ${product.badge}
+                            </span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-brand-green font-serif mb-2">${product.name}</h3>
+                        <p class="text-xs text-gray-500 mb-4 line-clamp-2">${product.description}</p>
+
+                        <div class="bg-gray-50 p-3 rounded-2xl mb-4 border border-gray-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-semibold text-gray-500">Rate per KG:</span>
+                                <span class="text-sm font-extrabold text-brand-green">KSh ${product.pricePerKg}</span>
+                            </div>
+
+                            <!-- Interactive Weight Selector per Item -->
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-gray-600">Qty (KG):</span>
+                                <div class="flex items-center bg-white rounded-xl border border-gray-200 overflow-hidden">
+                                    <button onclick="adjustCardKg('${product.id}', -0.5)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-100 font-bold">-</button>
+                                    <input type="number" id="qty-input-${product.id}" value="1" min="0.5" step="0.5" oninput="recalcCardTotal('${product.id}', ${product.pricePerKg})" class="w-12 text-center text-xs font-bold text-brand-green border-none focus:outline-none">
+                                    <button onclick="adjustCardKg('${product.id}', 0.5)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-100 font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6 pt-0 border-t border-gray-50 flex items-center justify-between gap-3">
+                        <div>
+                            <span class="text-[10px] text-gray-400 uppercase font-bold block">Subtotal</span>
+                            <span id="card-total-${product.id}" class="text-lg font-black text-brand-green">KSh ${product.pricePerKg}</span>
+                        </div>
+                        <button onclick="addCatalogItemToCart('${product.id}')" class="bg-brand-green hover:bg-brand-dark text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Order
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Adjust KG input on Card
+        function adjustCardKg(productId, delta) {
+            const input = document.getElementById(`qty-input-${productId}`);
+            let val = parseFloat(input.value) || 1;
+            val = Math.max(0.5, val + delta);
+            input.value = val;
+            
+            const product = products.find(p => p.id === productId);
+            if(product) recalcCardTotal(productId, product.pricePerKg);
+        }
+
+        // Recalculate Card Total
+        function recalcCardTotal(productId, pricePerKg) {
+            const input = document.getElementById(`qty-input-${productId}`);
+            const totalSpan = document.getElementById(`card-total-${productId}`);
+            let val = parseFloat(input.value) || 0;
+            const total = Math.round(val * pricePerKg);
+            totalSpan.textContent = `KSh ${total.toLocaleString()}`;
+        }
+
+        // Category Filter Logic
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('#category-filters button').forEach(btn => {
+                btn.classList.remove('bg-brand-green', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            event.target.classList.remove('bg-white', 'text-gray-700');
+            event.target.classList.add('bg-brand-green', 'text-white');
+
+            renderCatalog();
+        }
+
+        // Populate Calculator Select Box
+        function populateCalcSelect() {
+            const select = document.getElementById('calc-product');
+            select.innerHTML = '';
+            products.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.textContent = `${p.name} (KSh ${p.pricePerKg}/kg)`;
+                select.appendChild(opt);
+            });
+        }
+
+        // Update Calculator Estimate
+        function updateCalcEstimate() {
+            const productId = document.getElementById('calc-product').value;
+            const kg = parseFloat(document.getElementById('calc-kg').value) || 0;
+            const product = products.find(p => p.id === productId);
+
+            if (!product) return;
+
+            document.getElementById('calc-unit-price').textContent = `KSh ${product.pricePerKg} / kg`;
+            const total = Math.round(kg * product.pricePerKg);
+            
+            document.getElementById('calc-breakdown').textContent = `${kg} kg x KSh ${product.pricePerKg}`;
+            document.getElementById('calc-total').textContent = `KSh ${total.toLocaleString()}`;
+        }
+
+        function setCalcKg(val) {
+            document.getElementById('calc-kg').value = val;
+            updateCalcEstimate();
+        }
+
+        // Add Calculator Item to Cart
+        function addCalcToCart() {
+            const productId = document.getElementById('calc-product').value;
+            const kg = parseFloat(document.getElementById('calc-kg').value) || 1;
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                addToCart(product, kg);
+                toggleCartDrawer(true);
+            }
+        }
+
+        // Direct WhatsApp order from Calculator
+        function orderCalcDirectWhatsApp() {
+            const productId = document.getElementById('calc-product').value;
+            const kg = parseFloat(document.getElementById('calc-kg').value) || 1;
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                const total = Math.round(kg * product.pricePerKg);
+                const message = `Hi Miriam's Cereal Shop! 👋\nI would like to order:\n- *${product.name}*: ${kg} kg @ KSh ${product.pricePerKg}/kg = *KSh ${total}*\n\nPlease let me know delivery confirmation!`;
+                window.open(`https://wa.me/254703924543?text=${encodeURIComponent(message)}`, '_blank');
+            }
+        }
+
+        // Add Catalog Item to Cart
+        function addCatalogItemToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const input = document.getElementById(`qty-input-${productId}`);
+            const kg = parseFloat(input.value) || 1;
+
+            if (product) {
+                addToCart(product, kg);
+                toggleCartDrawer(true);
+            }
+        }
+
+        // Core Cart Functions
+        function addToCart(product, kg) {
+            const existingIndex = cart.findIndex(item => item.id === product.id);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].kg += kg;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    pricePerKg: product.pricePerKg,
+                    kg: kg
+                });
+            }
+
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartKg(index, delta) {
+            if (cart[index]) {
+                cart[index].kg = Math.max(0.5, cart[index].kg + delta);
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const totalWeightSpan = document.getElementById('cart-total-weight');
+            const totalPriceSpan = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // Badge Count
+            badge.textContent = cart.length;
+            if (cart.length > 0) {
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            // Cart Items Render
+            container.innerHTML = '';
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 text-gray-200"></i>
+                        <p class="text-sm font-semibold">Your order basket is empty.</p>
+                        <p class="text-xs">Browse our cereals and select custom kilogram amounts!</p>
+                    </div>
+                `;
+                totalWeightSpan.textContent = '0 kg';
+                totalPriceSpan.textContent = 'KSh 0';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            let totalWeight = 0;
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = Math.round(item.kg * item.pricePerKg);
+                totalWeight += item.kg;
+                totalPrice += itemTotal;
+
+                const row = document.createElement('div');
+                row.className = "bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between gap-3";
+                row.innerHTML = `
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-brand-green">${item.name}</h4>
+                        <span class="text-[10px] text-gray-500">KSh ${item.pricePerKg} / kg</span>
+                        <div class="text-sm font-extrabold text-brand-green mt-1">KSh ${itemTotal.toLocaleString()}</div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-white rounded-lg border border-gray-300">
+                            <button onclick="updateCartKg(${index}, -0.5)" class="px-2 py-0.5 text-xs font-bold text-gray-600 hover:bg-gray-100">-</button>
+                            <span class="px-2 text-xs font-extrabold text-brand-green">${item.kg} kg</span>
+                            <button onclick="updateCartKg(${index}, 0.5)" class="px-2 py-0.5 text-xs font-bold text-gray-600 hover:bg-gray-100">+</button>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 p-1 text-xs">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            totalWeightSpan.textContent = `${totalWeight} kg`;
+            totalPriceSpan.textContent = `KSh ${totalPrice.toLocaleString()}`;
+            checkoutBtn.disabled = false;
+        }
+
+        // Cart Drawer Drawer Control
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-drawer-backdrop');
+
+            if (open === true || drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        // Checkout Modal Functions
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            
+            toggleCartDrawer(false);
+            
+            const modal = document.getElementById('checkout-modal');
+            const summaryContainer = document.getElementById('modal-items-summary');
+            const modalCount = document.getElementById('modal-item-count');
+            const modalTotal = document.getElementById('modal-total-price');
+
+            summaryContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = Math.round(item.kg * item.pricePerKg);
+                total += itemTotal;
+
+                const line = document.createElement('div');
+                line.className = "flex justify-between py-0.5";
+                line.innerHTML = `
+                    <span>${item.name} (${item.kg} kg)</span>
+                    <span class="font-bold text-gray-800">KSh ${itemTotal.toLocaleString()}</span>
+                `;
+                summaryContainer.appendChild(line);
+            });
+
+            modalCount.textContent = `${cart.length} item(s)`;
+            modalTotal.textContent = `KSh ${total.toLocaleString()}`;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        // Finalize WhatsApp Order
+        function handleFinalSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('customer-name').value;
+            const address = document.getElementById('customer-address').value;
+            const notes = document.getElementById('customer-notes').value;
+
+            let orderText = `Hi *Miriam's Cereal Shop*! 👋\n\n*NEW ORDER DETAILS*\n------------------------\n`;
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = Math.round(item.kg * item.pricePerKg);
+                total += itemTotal;
+                orderText += `• *${item.name}*: ${item.kg} kg @ KSh ${item.pricePerKg}/kg = KSh ${itemTotal}\n`;
+            });
+
+            orderText += `------------------------\n`;
+            orderText += `*TOTAL AMOUNT: KSh ${total.toLocaleString()}*\n\n`;
+            orderText += `*CUSTOMER DETAILS:*\n`;
+            orderText += `👤 *Name*: ${name}\n`;
+            orderText += `📍 *Delivery Address*: ${address}\n`;
+            if (notes) orderText += `📝 *Notes*: ${notes}\n`;
+
+            window.open(`https://wa.me/254703924543?text=${encodeURIComponent(orderText)}`, '_blank');
+            closeCheckoutModal();
+        }
+
+        // Fallback Direct Email Order
+        function sendViaEmail() {
+            const name = document.getElementById('customer-name').value || "Valued Customer";
+            const address = document.getElementById('customer-address').value || "Address Not Provided";
+
+            let emailBody = `Order Request for Miriam's Cereal Shop:\n\nItems:\n`;
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = Math.round(item.kg * item.pricePerKg);
+                total += itemTotal;
+                emailBody += `- ${item.name}: ${item.kg} kg (KSh ${itemTotal})\n`;
+            });
+
+            emailBody += `\nTotal: KSh ${total}\nCustomer Name: ${name}\nDelivery Address: ${address}`;
+
+            window.location.href = `mailto:miriam.cereals@gmail.com?subject=New Cereal Order - ${name}&body=${encodeURIComponent(emailBody)}`;
+        }
+    </script>
+</body>
+</html>
